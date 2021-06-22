@@ -182,7 +182,7 @@ static ssize_t audio_output_latency_dbgfs_write(struct file *file,
 {
 	char *temp;
 
-	if (count > 2*sizeof(char)) {
+	if (count != 2*sizeof(char)) {
 		pr_err("%s: err count is more %zd\n", __func__, count);
 		return -EINVAL;
 	} else {
@@ -239,7 +239,7 @@ static ssize_t audio_input_latency_dbgfs_write(struct file *file,
 {
 	char *temp;
 
-	if (count > 2*sizeof(char)) {
+	if (count != 2*sizeof(char)) {
 		pr_err("%s: err count is more %zd\n", __func__, count);
 		return -EINVAL;
 	} else {
@@ -1934,7 +1934,7 @@ static int32_t q6asm_callback(struct apr_client_data *data, void *priv)
 				pr_debug("%s: Invalid token buffer index %u\n",
 					__func__, data->token);
 				spin_unlock_irqrestore(&port->dsp_lock,
-						dsp_flags);
+								dsp_flags);
 				spin_unlock_irqrestore(
 					&(session[session_id].session_lock),
 					flags);
